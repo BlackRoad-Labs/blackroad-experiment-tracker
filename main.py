@@ -12,7 +12,7 @@ import sqlite3
 import sys
 import uuid
 from dataclasses import asdict, dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
@@ -107,7 +107,7 @@ class ExperimentTracker:
     def create(self, name: str, model: str, hyperparams: dict | None = None,
                tags: list[str] | None = None, notes: str = "") -> Experiment:
         eid = str(uuid.uuid4())
-        now = datetime.utcnow().isoformat()
+        now = datetime.now(timezone.utc).isoformat()
         hp = hyperparams or {}
         t = tags or []
         with get_conn() as conn:
@@ -122,7 +122,7 @@ class ExperimentTracker:
 
     def log_metric(self, exp_id: str, name: str, value: float, step: int = 0) -> None:
         mid = str(uuid.uuid4())
-        now = datetime.utcnow().isoformat()
+        now = datetime.now(timezone.utc).isoformat()
         with get_conn() as conn:
             conn.execute(
                 "INSERT INTO metric_logs(id, experiment_id, name, value, step, logged_at) VALUES (?,?,?,?,?,?)",
@@ -142,7 +142,7 @@ class ExperimentTracker:
 
     def log_artifact(self, exp_id: str, name: str, path: str, artifact_type: str = "file") -> None:
         aid = str(uuid.uuid4())
-        now = datetime.utcnow().isoformat()
+        now = datetime.now(timezone.utc).isoformat()
         size: Optional[int] = None
         p = Path(path)
         if p.exists():
@@ -163,7 +163,7 @@ class ExperimentTracker:
                 )
 
     def finish(self, exp_id: str, status: str = "completed") -> None:
-        now = datetime.utcnow().isoformat()
+        now = datetime.now(timezone.utc).isoformat()
         with get_conn() as conn:
             conn.execute(
                 "UPDATE experiments SET status=?, updated_at=? WHERE id=?",
