@@ -1,3 +1,11 @@
+# blackroad-experiment-tracker
+
+> ML experiment tracking and comparison
+
+Part of the [BlackRoad OS](https://blackroad.io) ecosystem — [BlackRoad-Labs](https://github.com/BlackRoad-Labs)
+
+---
+
 # BlackRoad Experiment Tracker
 
 [![CI](https://github.com/BlackRoad-Labs/blackroad-experiment-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/BlackRoad-Labs/blackroad-experiment-tracker/actions/workflows/ci.yml)
@@ -399,4 +407,3 @@ Copyright © 2024–2026 BlackRoad OS, Inc. All Rights Reserved.
 Founder, CEO & Sole Stockholder: Alexa Louise Amundson.
 
 This software is proprietary and confidential. Unauthorized copying, distribution, or use is strictly prohibited. See [LICENSE](LICENSE) for full terms.
-
